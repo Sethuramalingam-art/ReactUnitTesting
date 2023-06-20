@@ -56,3 +56,13 @@ jest.mock("./ManyModals", () => ({
     return <mock-modal data-testid="modal"/>;
   },
 }));
+
+
+jest test the math library function
+
+const mockMathRandomFunction = jest.spyOn(Math, 'random');
+
+mockMathRandomFunction.mockReturnValue(23423423);
+mockMathRandomFunction.mockClear().mockReturnValue(232311)
+mockMathRandomFunction.mockClear().mockimplementation(()=> { return 232311})
+expect(mockMathRandomFunction(4,5)).toBe(23423423);
