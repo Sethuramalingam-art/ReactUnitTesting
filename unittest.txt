@@ -1,0 +1,58 @@
+how to mock the function in jest react???????
+
+jest.spyon(object, funtionname);
+
+If react component have funtion is getList() means
+
+test("Should render character name", async () => {
+  const mock = jest.spyOn(data, "getList").mockResolvedValue("Bob");
+
+  render(<Hello id={1} />);
+
+  expect(await screen.findByText(/Bob/)).toBeInTheDocument();
+
+  mock.mockRestore(); // restore the original implementation at the end of the test.
+});
+
+how to mock the react router dom modules in jest react?????
+and usenavigate and uselocation library functions mock
+
+
+const mockedUsedNavigate = jest.fn();
+const mockedUsedLocation = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUsedNavigate,
+  useLocation: () => mockedUsedLocation,
+}));
+
+
+if developer defined modules
+import React from "react";
+import { Modal } from "./ManyModals"; // user defined modals
+
+const TopLevelComponent = ({ open }) => (
+  <>
+    <p>Some other content to render...</p>
+    {open && <Modal />}
+  </>
+);
+
+export default TopLevelComponent;
+
+
+jest.mock("./ManyModals", () => ({
+  Modal: () => {
+    return <mock-modal data-testid="modal"/>;
+  },
+}));
+
+However if you are working with ES6 Modules then you will need to do the following:
+
+jest.mock("./ManyModals", () => ({
+  __esModule: true,
+  Modal: () => {
+    return <mock-modal data-testid="modal"/>;
+  },
+}));
