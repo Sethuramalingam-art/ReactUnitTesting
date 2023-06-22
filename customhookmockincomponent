@@ -1,0 +1,6 @@
+useLoanoffer is custom hook and your custom hook is exported with export default means you wnat oto mock like this and inside defualt you can access the values
+
+jest.mock("./useLoanOffer", () => ({
+  __esModule: true,
+  default: () => ({ loanEligibilityDetails: { expiresOn: "22-06-2023" } }),
+}));
